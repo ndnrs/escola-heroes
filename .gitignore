@@ -1,0 +1,8 @@
+# Test screenshots
+test-*.png
+
+# Playwright MCP
+.playwright-mcp/
+
+# OS
+.DS_Store
