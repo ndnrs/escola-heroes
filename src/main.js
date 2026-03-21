@@ -24,7 +24,9 @@
             EscolaHeroes.BootScene,
             EscolaHeroes.MenuScene,
             EscolaHeroes.HowToPlayScene,
-            EscolaHeroes.SelectScene
+            EscolaHeroes.SelectScene,
+            EscolaHeroes.TestScene,
+            EscolaHeroes.HUDScene
         ]
     };
 
