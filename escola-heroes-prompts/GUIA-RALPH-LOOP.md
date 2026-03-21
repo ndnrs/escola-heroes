@@ -31,7 +31,7 @@ npx serve .
 ### FASE 1 — Menu + Seleccao
 
 ```
-/ralph-loop "Lê o ficheiro escola-heroes-prompts/GAME-DESIGN.md e depois lê ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-1.md. Executa TUDO o que está descrito. Cria todos os ficheiros. Verifica todos os critérios de sucesso. Quando TODOS estiverem cumpridos, output <promise>FASE 1 COMPLETE</promise>" --completion-promise "FASE 1 COMPLETE" --max-iterations 20
+/ralph-loop "Lê o ficheiro escola-heroes-prompts/GAME-DESIGN.md e depois lê ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-1.md. Executa TUDO o que está descrito. Cria todos os ficheiros. Verifica todos os critérios de sucesso. Quando TODOS estiverem cumpridos, output <promise>FASE 1 COMPLETE</promise>" --completion-promise "FASE 1 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:
@@ -44,7 +44,7 @@ git add -A && git commit -m "fase 1: menu e seleccao personagem"
 ### FASE 2 — Mecanicas Core
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-2.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 2 COMPLETE</promise>" --completion-promise "FASE 2 COMPLETE" --max-iterations 25
+/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-2.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 2 COMPLETE</promise>" --completion-promise "FASE 2 COMPLETE" --max-iterations 25
 ```
 
 Testar no browser. Se OK:
@@ -57,7 +57,7 @@ git add -A && git commit -m "fase 2: mecanicas core"
 ### FASE 3 — Nivel 1: Cantina
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-3.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 3 COMPLETE</promise>" --completion-promise "FASE 3 COMPLETE" --max-iterations 20
+/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-3.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 3 COMPLETE</promise>" --completion-promise "FASE 3 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:
@@ -70,7 +70,7 @@ git add -A && git commit -m "fase 3: nivel cantina"
 ### FASE 4 — Nivel 2: Pavilhao Desportivo
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-4.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 4 COMPLETE</promise>" --completion-promise "FASE 4 COMPLETE" --max-iterations 20
+/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-4.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 4 COMPLETE</promise>" --completion-promise "FASE 4 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:
@@ -83,7 +83,7 @@ git add -A && git commit -m "fase 4: nivel pavilhao desportivo"
 ### FASE 5 — Nivel 3: Salas de Aula
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-5.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 5 COMPLETE</promise>" --completion-promise "FASE 5 COMPLETE" --max-iterations 20
+/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-5.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 5 COMPLETE</promise>" --completion-promise "FASE 5 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:
@@ -96,7 +96,7 @@ git add -A && git commit -m "fase 5: nivel salas de aula"
 ### FASE 6 — Boss Final: Patio da Escola
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-6.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 6 COMPLETE</promise>" --completion-promise "FASE 6 COMPLETE" --max-iterations 20
+/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-6.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 6 COMPLETE</promise>" --completion-promise "FASE 6 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:
@@ -109,7 +109,7 @@ git add -A && git commit -m "fase 6: boss final e vitoria"
 ### FASE 7 — Polish Final
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/morfeus/escola-heroes/escola-heroes-prompts/PROMPT-FASE-7.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 7 COMPLETE</promise>" --completion-promise "FASE 7 COMPLETE" --max-iterations 20
+/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-7.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 7 COMPLETE</promise>" --completion-promise "FASE 7 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:
