@@ -9,10 +9,14 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
         super({ key: 'HUDScene' });
     }
 
-    create() {
+    create(data) {
         var W = EscolaHeroes.GAME_WIDTH;
         var H = EscolaHeroes.GAME_HEIGHT;
         var charData = this.registry.get('selectedCharacter');
+
+        // Configuracao dinamica
+        this.gameSceneKey = (data && data.gameSceneKey) || 'TestScene';
+        var levelName = (data && data.levelName) || 'TESTE';
 
         // --- Topo esquerda: Avatar + Nome ---
         var avatarKey = 'char_' + charData.name.toLowerCase();
@@ -32,7 +36,7 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
         this.healthBar.setValue(100, 100);
 
         // --- Topo direita: Nome do nivel ---
-        this.levelText = this.add.text(W - 15, 14, 'TESTE', {
+        this.levelText = this.add.text(W - 15, 14, levelName, {
             fontFamily: 'Arial Black, Arial',
             fontSize: '14px',
             color: '#FFFFFF',
@@ -68,7 +72,7 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
         }
 
         // --- Escutar eventos da game scene ---
-        var gameScene = this.scene.get('TestScene');
+        var gameScene = this.scene.get(this.gameSceneKey);
         if (gameScene) {
             var self = this;
 
@@ -82,10 +86,6 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
 
             gameScene.events.on('monsterKilled', function (x, y, scoreValue) {
                 self.addScore(scoreValue);
-            });
-
-            gameScene.events.on('playerDied', function () {
-                self.showGameOver();
             });
         }
     }
@@ -108,86 +108,6 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
     addScore(value) {
         this.score += value;
         this.scoreText.setText('Pontos: ' + this.score);
-    }
-
-    showGameOver() {
-        var W = EscolaHeroes.GAME_WIDTH;
-        var H = EscolaHeroes.GAME_HEIGHT;
-        var self = this;
-
-        // Overlay escuro
-        var overlay = this.add.graphics();
-        overlay.fillStyle(0x000000, 0.7);
-        overlay.fillRect(0, 0, W, H);
-        overlay.setDepth(300);
-
-        // Texto "OH NAO!"
-        var title = this.add.text(W / 2, H / 2 - 60, 'OH NAO!', {
-            fontFamily: 'Arial Black, Arial',
-            fontSize: '48px',
-            color: '#FF4444',
-            stroke: '#000000',
-            strokeThickness: 4
-        }).setOrigin(0.5).setDepth(301);
-
-        // Animacao do titulo
-        this.tweens.add({
-            targets: title,
-            scaleX: 1.1,
-            scaleY: 1.1,
-            duration: 500,
-            yoyo: true,
-            repeat: -1
-        });
-
-        // Stats
-        this.add.text(W / 2, H / 2 - 5, 'Pontos: ' + this.score, {
-            fontFamily: 'Arial, sans-serif',
-            fontSize: '20px',
-            color: '#FFFFFF'
-        }).setOrigin(0.5).setDepth(301);
-
-        // Botao "TENTAR OUTRA VEZ"
-        var retryBtn = this.add.container(W / 2, H / 2 + 50);
-        var retryBg = this.add.graphics();
-        retryBg.fillStyle(0x00AA00, 1);
-        retryBg.fillRoundedRect(-100, -20, 200, 40, 8);
-        retryBtn.add(retryBg);
-        retryBtn.add(this.add.text(0, 0, 'TENTAR OUTRA VEZ', {
-            fontFamily: 'Arial Black, Arial',
-            fontSize: '16px',
-            color: '#FFFFFF'
-        }).setOrigin(0.5));
-        retryBtn.setSize(200, 40);
-        retryBtn.setInteractive({ useHandCursor: true });
-        retryBtn.setDepth(301);
-
-        retryBtn.on('pointerup', function () {
-            self.scene.stop('HUDScene');
-            self.scene.stop('TestScene');
-            self.scene.start('TestScene');
-        });
-
-        // Botao "MENU"
-        var menuBtn = this.add.container(W / 2, H / 2 + 105);
-        var menuBg = this.add.graphics();
-        menuBg.fillStyle(0x4A90D9, 1);
-        menuBg.fillRoundedRect(-80, -18, 160, 36, 8);
-        menuBtn.add(menuBg);
-        menuBtn.add(this.add.text(0, 0, 'MENU', {
-            fontFamily: 'Arial Black, Arial',
-            fontSize: '16px',
-            color: '#FFFFFF'
-        }).setOrigin(0.5));
-        menuBtn.setSize(160, 36);
-        menuBtn.setInteractive({ useHandCursor: true });
-        menuBtn.setDepth(301);
-
-        menuBtn.on('pointerup', function () {
-            self.scene.stop('HUDScene');
-            self.scene.stop('TestScene');
-            self.scene.start('MenuScene');
-        });
     }
 
     getJoystickData() {

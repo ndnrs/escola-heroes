@@ -257,7 +257,7 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
 
         // Transicao apos feedback visual
         this.time.delayedCall(500, function () {
-            self.scene.start('TestScene');
+            self.scene.start('CantinScene');
         });
     }
 

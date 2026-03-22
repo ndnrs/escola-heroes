@@ -25,6 +25,10 @@
             EscolaHeroes.MenuScene,
             EscolaHeroes.HowToPlayScene,
             EscolaHeroes.SelectScene,
+            EscolaHeroes.CantinScene,
+            EscolaHeroes.GymScene,
+            EscolaHeroes.LevelCompleteScene,
+            EscolaHeroes.GameOverScene,
             EscolaHeroes.TestScene,
             EscolaHeroes.HUDScene
         ]

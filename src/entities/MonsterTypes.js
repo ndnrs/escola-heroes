@@ -53,19 +53,54 @@ EscolaHeroes.spawnMonster = function (scene, typeName, x, y, monstersGroup) {
             break;
 
         case 'AranhaSaltitona':
-            // Nao precisa de tween extra, o salto esta no update
+            // Salto visual periodico (cada 2 segundos)
+            scene.time.addEvent({
+                delay: 2000,
+                callback: function () {
+                    if (!monster.alive || !monster.sprite || !monster.sprite.active) return;
+                    scene.tweens.add({
+                        targets: monster.sprite,
+                        y: monster.sprite.y - 80,
+                        duration: 250,
+                        ease: 'Power2',
+                        yoyo: true
+                    });
+                },
+                loop: true
+            });
             break;
 
         case 'Fantasma':
-            // Aparecer/desaparecer
+            // Invulnerabilidade ciclica: visivel 3s, invisivel 1.5s
             monster.sprite.setAlpha(0.7);
-            scene.tweens.add({
-                targets: monster.sprite,
-                alpha: 0.3,
-                duration: 1500,
-                yoyo: true,
-                repeat: -1,
-                ease: 'Sine.easeInOut'
+            monster.isInvulnerable = false;
+            scene.time.addEvent({
+                delay: 3000,
+                callback: function () {
+                    if (!monster.alive || !monster.sprite || !monster.sprite.active) return;
+                    // Ficar invisivel e invulneravel
+                    monster.isInvulnerable = true;
+                    if (monster.sprite.body) monster.sprite.body.enable = false;
+                    scene.tweens.add({
+                        targets: monster.sprite,
+                        alpha: 0.1,
+                        duration: 300,
+                        onComplete: function () {
+                            // Voltar ao normal apos 1.5s
+                            scene.time.delayedCall(1500, function () {
+                                if (!monster.alive || !monster.sprite || !monster.sprite.active) return;
+                                monster.isInvulnerable = false;
+                                if (monster.sprite.body) monster.sprite.body.enable = true;
+                                scene.tweens.add({
+                                    targets: monster.sprite,
+                                    alpha: 0.7,
+                                    duration: 300
+                                });
+                            });
+                        }
+                    });
+                },
+                loop: true
             });
             break;
 
