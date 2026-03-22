@@ -18,6 +18,12 @@ EscolaHeroes.LevelCompleteScene = class LevelCompleteScene extends Phaser.Scene 
         var stats = (data && data.stats) || {};
         var levelName = (data && data.levelName) || 'NIVEL';
 
+        // Acumular stats totais no registry
+        var totalStats = this.registry.get('totalStats') || { monstersKilled: 0, time: 0 };
+        totalStats.monstersKilled += (stats.monstersKilled || 0);
+        totalStats.time += (stats.time || 0);
+        this.registry.set('totalStats', totalStats);
+
         // Fundo escuro festivo
         this.cameras.main.setBackgroundColor('#0a0a2e');
 

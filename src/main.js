@@ -29,6 +29,8 @@
             EscolaHeroes.GymScene,
             EscolaHeroes.ClassroomScene,
             EscolaHeroes.LevelCompleteScene,
+            EscolaHeroes.BossScene,
+            EscolaHeroes.VictoryScene,
             EscolaHeroes.GameOverScene,
             EscolaHeroes.TestScene,
             EscolaHeroes.HUDScene

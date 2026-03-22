@@ -631,7 +631,7 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
         this.scene.stop('HUDScene');
         this.scene.start('LevelCompleteScene', {
             levelName: 'SALAS DE AULA',
-            nextLevelKey: null, // Boss Final sera Fase 6
+            nextLevelKey: 'BossScene',
             stats: {
                 monstersKilled: this.monstersKilled,
                 totalMonsters: 26,
