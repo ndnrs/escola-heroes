@@ -27,6 +27,7 @@
             EscolaHeroes.SelectScene,
             EscolaHeroes.CantinScene,
             EscolaHeroes.GymScene,
+            EscolaHeroes.ClassroomScene,
             EscolaHeroes.LevelCompleteScene,
             EscolaHeroes.GameOverScene,
             EscolaHeroes.TestScene,

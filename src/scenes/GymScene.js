@@ -553,7 +553,7 @@ EscolaHeroes.GymScene = class GymScene extends Phaser.Scene {
         this.scene.stop('HUDScene');
         this.scene.start('LevelCompleteScene', {
             levelName: 'PAVILHAO DESPORTIVO',
-            nextLevelKey: null, // Proximo nivel ainda nao existe
+            nextLevelKey: 'ClassroomScene',
             stats: {
                 monstersKilled: this.monstersKilled,
                 totalMonsters: 21,

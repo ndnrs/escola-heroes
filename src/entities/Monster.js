@@ -83,11 +83,17 @@ EscolaHeroes.Monster.prototype.update = function (time, playerSprite) {
             break;
 
         case 'Sombra':
-            // Muda direcao abruptamente
-            if (Math.random() < 0.02) {
-                var randomAngle = Math.random() * Math.PI * 2;
-                vx = Math.cos(randomAngle) * currentSpeed;
-                vy = Math.sin(randomAngle) * currentSpeed;
+            // Muda direcao a cada 1.5s dentro de 45 graus da direcao ao jogador
+            if (!this._lastDirChange) this._lastDirChange = 0;
+            if (time > this._lastDirChange + 1500) {
+                this._lastDirChange = time;
+                var baseAngle = Math.atan2(ny, nx);
+                var deviation = (Math.random() - 0.5) * (Math.PI / 2);
+                this._sombraAngle = baseAngle + deviation;
+            }
+            if (this._sombraAngle !== undefined) {
+                vx = Math.cos(this._sombraAngle) * currentSpeed;
+                vy = Math.sin(this._sombraAngle) * currentSpeed;
             }
             break;
 
@@ -106,21 +112,31 @@ EscolaHeroes.Monster.prototype.tryShoot = function (time, playerSprite, monsterP
     if (this.typeName !== 'LivroVoador') return;
     if (!this.alive || !this.sprite.active || !playerSprite || !playerSprite.active) return;
 
-    // Dispara a cada 2 segundos
+    // Dispara letra a cada 2.5 segundos
     if (!this._lastShot) this._lastShot = 0;
-    if (time < this._lastShot + 2000) return;
+    if (time < this._lastShot + 2500) return;
     this._lastShot = time;
 
-    var proj = monsterProjectiles.create(this.sprite.x, this.sprite.y, 'proj_monster');
-    if (!proj) return;
+    // Projectil letra
+    var letters = ['A', 'B', 'C', 'X', 'Z'];
+    var letter = letters[Math.floor(Math.random() * letters.length)];
+    var proj = this.scene.add.text(this.sprite.x, this.sprite.y, letter, {
+        fontFamily: 'Arial Black, Arial',
+        fontSize: '16px',
+        color: '#FFFFFF',
+        stroke: '#8B4513',
+        strokeThickness: 3
+    }).setOrigin(0.5).setDepth(5);
+
+    this.scene.physics.add.existing(proj);
+    monsterProjectiles.add(proj);
 
     var dx = playerSprite.x - this.sprite.x;
     var dy = playerSprite.y - this.sprite.y;
     var dist = Math.sqrt(dx * dx + dy * dy);
     if (dist === 0) return;
 
-    proj.setVelocity((dx / dist) * 200, (dy / dist) * 200);
-    proj.setDepth(5);
+    proj.body.setVelocity((dx / dist) * 200, (dy / dist) * 200);
     proj.damage = EscolaHeroes.MONSTER_PROJECTILE_DAMAGE;
 
     // Auto-destruir apos 3 segundos
