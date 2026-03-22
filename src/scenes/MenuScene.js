@@ -13,6 +13,22 @@ EscolaHeroes.MenuScene = class MenuScene extends Phaser.Scene {
         var W = EscolaHeroes.GAME_WIDTH;
         var H = EscolaHeroes.GAME_HEIGHT;
 
+        this.cameras.main.fadeIn(500);
+        EscolaHeroes.AudioManager.startMusic('menu');
+
+        // Versao e creditos (depth alto para ficar acima do background)
+        this.add.text(W - 10, H - 10, 'v1.0', {
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '10px',
+            color: '#336633'
+        }).setOrigin(1, 1).setDepth(20);
+
+        this.add.text(W / 2, H - 10, 'Feito com amor para [NOME]', {
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '10px',
+            color: '#336633'
+        }).setOrigin(0.5, 1).setDepth(20);
+
         // --- Background: gradiente ceu → relva ---
         this.drawBackground(W, H);
 

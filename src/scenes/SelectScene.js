@@ -257,9 +257,7 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
 
         // Transicao apos feedback visual
         this.time.delayedCall(500, function () {
-            // Nesta fase, nao ha nivel 1 ainda, entao voltamos ao menu
-            // Quando o nivel 1 existir, será: self.scene.start('CantinScene');
-            self.scene.start('MenuScene');
+            self.scene.start('CantinScene');
         });
     }
 

@@ -74,4 +74,17 @@ EscolaHeroes.LEVELS = [
 // --- Especial ---
 EscolaHeroes.SPECIAL_KILLS_NEEDED = 10;
 
+// --- Tipos de Monstros ---
+EscolaHeroes.MONSTER_TYPES = {
+    GOSMA_VERDE:     { name: 'GosmaVerde',      hp: 30, speed: 60,  damage: 10, color: 0x00AA00, scoreValue: 10 },
+    MORCEGO:         { name: 'Morcego',          hp: 20, speed: 120, damage: 10, color: 0x666666, scoreValue: 15 },
+    ARANHA_SALTITONA:{ name: 'AranhaSaltitona',  hp: 25, speed: 80,  damage: 10, color: 0x8B4513, scoreValue: 12 },
+    FANTASMA:        { name: 'Fantasma',         hp: 40, speed: 70,  damage: 10, color: 0xCCCCFF, scoreValue: 20 },
+    LIVRO_VOADOR:    { name: 'LivroVoador',      hp: 35, speed: 90,  damage: 10, color: 0xA0522D, scoreValue: 18 },
+    SOMBRA:          { name: 'Sombra',           hp: 45, speed: 150, damage: 10, color: 0x333333, scoreValue: 25 }
+};
+
+// --- Projecteis de Monstros ---
+EscolaHeroes.MONSTER_PROJECTILE_DAMAGE = 15;
+
 window.EscolaHeroes = EscolaHeroes;
