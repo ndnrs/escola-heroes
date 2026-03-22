@@ -99,6 +99,7 @@ EscolaHeroes.Player.prototype.shoot = function (time, projectiles) {
     // Rotacao do projectil na direcao do movimento
     proj.setRotation(Math.atan2(ny, nx));
 
+    EscolaHeroes.AudioManager.play('shoot');
     return proj;
 };
 
@@ -130,6 +131,8 @@ EscolaHeroes.Player.prototype.takeDamage = function (amount) {
 
     // Screen shake
     this.scene.cameras.main.shake(100, 0.01);
+
+    EscolaHeroes.AudioManager.play('playerDamage');
 
     // Notificar HUD
     this.scene.events.emit('playerDamaged', this.hp, this.maxHp);
@@ -237,6 +240,8 @@ EscolaHeroes.Player.prototype.useSpecial = function (monsters) {
             effectGfx.destroy();
         }
     });
+
+    EscolaHeroes.AudioManager.play('special');
 
     // Flash da camera
     this.scene.cameras.main.flash(300,

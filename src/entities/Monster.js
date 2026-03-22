@@ -151,6 +151,8 @@ EscolaHeroes.Monster.prototype.takeDamage = function (amount) {
 
     this.hp -= amount;
 
+    EscolaHeroes.AudioManager.play('hit');
+
     // Flash vermelho
     if (this.sprite && this.sprite.active) {
         this.sprite.setTint(0xFF0000);
@@ -208,6 +210,8 @@ EscolaHeroes.Monster.prototype.die = function () {
             }
         }
     });
+
+    EscolaHeroes.AudioManager.play('monsterDie');
 
     // Emitir evento de morte (para power-ups e score)
     this.scene.events.emit('monsterKilled', x, y, this.scoreValue);

@@ -17,6 +17,10 @@ EscolaHeroes.GameOverScene = class GameOverScene extends Phaser.Scene {
         var levelKey = (data && data.levelKey) || 'CantinScene';
         var stats = (data && data.stats) || {};
 
+        EscolaHeroes.AudioManager.stopMusic();
+        EscolaHeroes.AudioManager.play('gameOver');
+        this.cameras.main.fadeIn(300);
+
         // Fundo escuro com tom vermelho
         this.cameras.main.setBackgroundColor('#1a0a0a');
 

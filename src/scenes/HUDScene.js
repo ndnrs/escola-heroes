@@ -87,11 +87,50 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
             gameScene.events.on('monsterKilled', function (x, y, scoreValue) {
                 self.addScore(scoreValue);
             });
+
+            gameScene.events.on('waveStart', function (waveNum, totalWaves) {
+                self.setWave(waveNum, totalWaves);
+            });
         }
+
+        // Wave indicator
+        this.waveText = this.add.text(W / 2, H - 45, '', {
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '10px',
+            color: '#AAAAAA'
+        }).setOrigin(0.5).setDepth(100);
+
+        // Vignette (cantos escuros quando HP baixo)
+        this.vignette = this.add.graphics().setDepth(99).setAlpha(0);
+        this.vignette.fillStyle(0x000000, 0.6);
+        this.vignette.fillRect(0, 0, 80, H);
+        this.vignette.fillRect(W - 80, 0, 80, H);
+        this.vignette.fillRect(0, 0, W, 40);
+        this.vignette.fillRect(0, H - 40, W, 40);
+
+        // Power-up indicator
+        this.powerIndicator = this.add.text(W - 15, 35, '', {
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '10px',
+            color: '#FFD700',
+            stroke: '#000000',
+            strokeThickness: 1
+        }).setOrigin(1, 0).setDepth(100);
     }
 
     updateHP(current, max) {
         this.healthBar.setValue(current, max);
+        // Vignette quando HP < 30%
+        var ratio = current / max;
+        if (this.vignette) {
+            this.vignette.setAlpha(ratio < 0.3 ? 0.5 * (1 - ratio / 0.3) : 0);
+        }
+    }
+
+    setWave(waveNum, totalWaves) {
+        if (this.waveText) {
+            this.waveText.setText('Wave ' + waveNum + '/' + (totalWaves || '?'));
+        }
     }
 
     updateSpecial(current, max) {

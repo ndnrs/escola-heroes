@@ -24,6 +24,10 @@ EscolaHeroes.LevelCompleteScene = class LevelCompleteScene extends Phaser.Scene 
         totalStats.time += (stats.time || 0);
         this.registry.set('totalStats', totalStats);
 
+        EscolaHeroes.AudioManager.stopMusic();
+        EscolaHeroes.AudioManager.play('levelComplete');
+        this.cameras.main.fadeIn(300);
+
         // Fundo escuro festivo
         this.cameras.main.setBackgroundColor('#0a0a2e');
 

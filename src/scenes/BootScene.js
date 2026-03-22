@@ -48,9 +48,18 @@ EscolaHeroes.BootScene = class BootScene extends Phaser.Scene {
                     loadTimer.remove(false);
                     // Gerar todas as texturas
                     self.generateTextures();
-                    // Transicao para menu
-                    self.time.delayedCall(300, function () {
-                        self.scene.start('MenuScene');
+
+                    loadingText.setText('Toca para comecar');
+                    loadingText.setFontSize('28px');
+
+                    // Esperar por interaccao do utilizador (necessario para AudioContext)
+                    self.input.once('pointerdown', function () {
+                        EscolaHeroes.AudioManager.resume();
+                        EscolaHeroes.AudioManager.play('click');
+                        self.cameras.main.fadeOut(300, 0, 0, 0);
+                        self.cameras.main.once('camerafadeoutcomplete', function () {
+                            self.scene.start('MenuScene');
+                        });
                     });
                 }
             },

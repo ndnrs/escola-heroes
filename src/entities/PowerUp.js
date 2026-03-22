@@ -84,6 +84,8 @@ EscolaHeroes.applyPowerUp = function (scene, player, powerup) {
     var x = powerup.x;
     var y = powerup.y;
 
+    EscolaHeroes.AudioManager.play('powerup');
+
     // Aplicar efeito
     switch (type) {
         case 'HEART':

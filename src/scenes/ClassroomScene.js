@@ -14,6 +14,9 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
         var H = EscolaHeroes.GAME_HEIGHT;
         var self = this;
 
+        this.cameras.main.fadeIn(500);
+        EscolaHeroes.AudioManager.startMusic('level');
+
         this.drawBackground(W, H);
 
         this.charData = this.registry.get('selectedCharacter');

@@ -14,6 +14,9 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
         var H = EscolaHeroes.GAME_HEIGHT;
         var self = this;
 
+        this.cameras.main.fadeIn(500);
+        EscolaHeroes.AudioManager.startMusic('level');
+
         // Fundo da cantina
         this.drawBackground(W, H);
 

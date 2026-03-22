@@ -17,6 +17,11 @@ EscolaHeroes.VictoryScene = class VictoryScene extends Phaser.Scene {
         var stats = (data && data.stats) || {};
         var charData = (data && data.charData) || this.registry.get('selectedCharacter');
 
+        EscolaHeroes.AudioManager.stopMusic();
+        EscolaHeroes.AudioManager.play('bossDie');
+        EscolaHeroes.AudioManager.startMusic('victory');
+        this.cameras.main.fadeIn(500);
+
         // Fundo: ceu azul brilhante
         this.cameras.main.setBackgroundColor('#4AAEF0');
 
