@@ -275,33 +275,38 @@ EscolaHeroes.MenuScene = class MenuScene extends Phaser.Scene {
         container.setSize(bw, bh);
         container.setInteractive({ useHandCursor: true });
 
-        // Hover feedback
+        // Hover feedback (usar closure 'self' em vez de 'this.scene')
+        var self = this;
         container.on('pointerover', function () {
-            this.scene.tweens.add({
+            if (!self.sys.isActive()) return;
+            self.tweens.add({
                 targets: container,
                 scaleX: 1.1,
                 scaleY: 1.1,
                 duration: 150,
                 ease: 'Back.easeOut'
             });
-        }, this);
+        });
 
         container.on('pointerout', function () {
-            this.scene.tweens.add({
+            if (!self.sys.isActive()) return;
+            self.tweens.add({
                 targets: container,
                 scaleX: 1,
                 scaleY: 1,
                 duration: 150,
                 ease: 'Back.easeOut'
             });
-        }, this);
+        });
 
         // Click
         container.on('pointerdown', function () {
+            if (!self.sys.isActive()) return;
             container.setScale(0.95);
         });
 
         container.on('pointerup', function () {
+            if (!self.sys.isActive()) return;
             container.setScale(1);
             callback();
         });
