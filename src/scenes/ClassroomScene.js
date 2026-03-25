@@ -56,6 +56,7 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
         this.levelStartTime = this.time.now;
         this.bossActive = false;
         this.levelComplete = false;
+        this.transitioning = false;
 
         // Boss
         this.boss = null;
@@ -120,6 +121,8 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
         });
 
         this.events.on('playerDied', function () {
+            if (self.transitioning || self.levelComplete) return;
+            self.transitioning = true;
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
@@ -630,6 +633,8 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
     }
 
     completeLevel() {
+        if (this.transitioning) return;
+        this.transitioning = true;
         this.levelComplete = true;
         var elapsed = (this.time.now - this.levelStartTime) / 1000;
 
@@ -664,6 +669,7 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
     }
 
     onMonsterHitPlayer(playerSprite, monsterSprite) {
+        if (this.transitioning || this.levelComplete) return;
         if (!playerSprite.active || !monsterSprite.active) return;
         if (!playerSprite.playerRef) return;
         if (monsterSprite.monsterRef && monsterSprite.monsterRef.isInvulnerable) return;
@@ -672,6 +678,7 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
     }
 
     onMonsterProjectileHitPlayer(playerSprite, projectile) {
+        if (this.transitioning || this.levelComplete) return;
         if (!playerSprite.active || !projectile.active) return;
         if (!playerSprite.playerRef) return;
         playerSprite.playerRef.takeDamage(projectile.damage || EscolaHeroes.MONSTER_PROJECTILE_DAMAGE);

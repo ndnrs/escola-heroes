@@ -59,6 +59,7 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
         this.bossActive = false;
         this.bossDefeated = false;
         this.levelComplete = false;
+        this.transitioning = false;
 
         // Eventos de morte de monstros
         this.events.on('monsterKilled', function (x, y, scoreValue) {
@@ -97,6 +98,8 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
 
         // Evento de morte do jogador
         this.events.on('playerDied', function () {
+            if (self.transitioning || self.levelComplete) return;
+            self.transitioning = true;
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
@@ -503,6 +506,8 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
     }
 
     completeLevel() {
+        if (this.transitioning) return;
+        this.transitioning = true;
         this.levelComplete = true;
         var elapsed = (this.time.now - this.levelStartTime) / 1000;
 
@@ -535,6 +540,7 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
     }
 
     onMonsterHitPlayer(playerSprite, monsterSprite) {
+        if (this.transitioning || this.levelComplete) return;
         if (!playerSprite.active || !monsterSprite.active) return;
         if (!playerSprite.playerRef) return;
         var damage = 10;
@@ -543,6 +549,7 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
     }
 
     onMonsterProjectileHitPlayer(playerSprite, projectile) {
+        if (this.transitioning || this.levelComplete) return;
         if (!playerSprite.active || !projectile.active) return;
         if (!playerSprite.playerRef) return;
         var damage = projectile.damage || EscolaHeroes.MONSTER_PROJECTILE_DAMAGE;

@@ -57,6 +57,7 @@ EscolaHeroes.BossScene = class BossScene extends Phaser.Scene {
         this.monstersKilled = 0;
         this.levelStartTime = this.time.now;
         this.levelComplete = false;
+        this.transitioning = false;
 
         // Boss
         this.boss = null;
@@ -73,6 +74,8 @@ EscolaHeroes.BossScene = class BossScene extends Phaser.Scene {
         });
 
         this.events.on('playerDied', function () {
+            if (self.transitioning || self.levelComplete) return;
+            self.transitioning = true;
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
                 self.scene.start('GameOverScene', {
@@ -574,6 +577,8 @@ EscolaHeroes.BossScene = class BossScene extends Phaser.Scene {
     }
 
     bossDie() {
+        if (this.transitioning) return;
+        this.transitioning = true;
         this.boss.alive = false;
         this.boss.sprite.monsterRef.alive = false;
         this.levelComplete = true;
@@ -669,12 +674,14 @@ EscolaHeroes.BossScene = class BossScene extends Phaser.Scene {
     }
 
     onMonsterHitPlayer(playerSprite, monsterSprite) {
+        if (this.transitioning || this.levelComplete) return;
         if (!playerSprite.active || !monsterSprite.active || !playerSprite.playerRef) return;
         var damage = monsterSprite.monsterRef ? monsterSprite.monsterRef.damage : 10;
         playerSprite.playerRef.takeDamage(damage);
     }
 
     onMonsterProjectileHitPlayer(playerSprite, projectile) {
+        if (this.transitioning || this.levelComplete) return;
         if (!playerSprite.active || !projectile.active || !playerSprite.playerRef) return;
         playerSprite.playerRef.takeDamage(projectile.damage || 15);
         projectile.destroy();
