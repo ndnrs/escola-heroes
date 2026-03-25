@@ -110,8 +110,9 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
             });
         });
 
-        // Iniciar waves
-        this.waveManager.start();
+        // Iniciar waves (delay para HUDScene inicializar)
+        var self2 = this;
+        this.time.delayedCall(200, function () { self2.waveManager.start(); });
 
         // Guardar referencia dos monstros do WaveManager
         this._updateMonsterList();

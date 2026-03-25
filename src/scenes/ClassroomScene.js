@@ -133,7 +133,9 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
             });
         });
 
-        this.waveManager.start();
+        // Delay para HUDScene inicializar
+        var self2 = this;
+        this.time.delayedCall(200, function () { self2.waveManager.start(); });
     }
 
     update(time, delta) {

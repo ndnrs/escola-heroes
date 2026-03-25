@@ -73,25 +73,31 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
 
         // --- Escutar eventos da game scene ---
         var gameScene = this.scene.get(this.gameSceneKey);
+        this._gameScene = gameScene;
         if (gameScene) {
             var self = this;
 
-            gameScene.events.on('playerDamaged', function (hp, maxHp) {
-                self.updateHP(hp, maxHp);
-            });
+            // Guardar handlers para poder remover no shutdown
+            this._onPlayerDamaged = function (hp, maxHp) { self.updateHP(hp, maxHp); };
+            this._onSpecialChanged = function (current, max) { self.updateSpecial(current, max); };
+            this._onMonsterKilled = function (x, y, scoreValue) { self.addScore(scoreValue); };
+            this._onWaveStart = function (waveNum, totalWaves) { self.setWave(waveNum, totalWaves); };
 
-            gameScene.events.on('specialChargeChanged', function (current, max) {
-                self.updateSpecial(current, max);
-            });
-
-            gameScene.events.on('monsterKilled', function (x, y, scoreValue) {
-                self.addScore(scoreValue);
-            });
-
-            gameScene.events.on('waveStart', function (waveNum, totalWaves) {
-                self.setWave(waveNum, totalWaves);
-            });
+            gameScene.events.on('playerDamaged', this._onPlayerDamaged);
+            gameScene.events.on('specialChargeChanged', this._onSpecialChanged);
+            gameScene.events.on('monsterKilled', this._onMonsterKilled);
+            gameScene.events.on('waveStart', this._onWaveStart);
         }
+
+        // Limpar listeners quando a scene e parada
+        this.events.on('shutdown', function () {
+            if (self._gameScene) {
+                self._gameScene.events.off('playerDamaged', self._onPlayerDamaged);
+                self._gameScene.events.off('specialChargeChanged', self._onSpecialChanged);
+                self._gameScene.events.off('monsterKilled', self._onMonsterKilled);
+                self._gameScene.events.off('waveStart', self._onWaveStart);
+            }
+        });
 
         // Wave indicator
         this.waveText = this.add.text(W / 2, H - 45, '', {
@@ -119,7 +125,7 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
     }
 
     updateHP(current, max) {
-        this.healthBar.setValue(current, max);
+        if (this.healthBar) this.healthBar.setValue(current, max);
         // Vignette quando HP < 30%
         var ratio = current / max;
         if (this.vignette) {
@@ -128,7 +134,7 @@ EscolaHeroes.HUDScene = class HUDScene extends Phaser.Scene {
     }
 
     setWave(waveNum, totalWaves) {
-        if (this.waveText) {
+        if (this.waveText && this.waveText.active) {
             this.waveText.setText('Wave ' + waveNum + '/' + (totalWaves || '?'));
         }
     }
