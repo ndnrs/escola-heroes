@@ -10,6 +10,9 @@ EscolaHeroes.HowToPlayScene = class HowToPlayScene extends Phaser.Scene {
     }
 
     create() {
+        this.input.enabled = true;
+        this.events.once('shutdown', function () { this.input.enabled = false; }, this);
+
         var W = EscolaHeroes.GAME_WIDTH;
         var H = EscolaHeroes.GAME_HEIGHT;
 

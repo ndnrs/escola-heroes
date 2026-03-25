@@ -13,6 +13,9 @@ EscolaHeroes.MenuScene = class MenuScene extends Phaser.Scene {
         var W = EscolaHeroes.GAME_WIDTH;
         var H = EscolaHeroes.GAME_HEIGHT;
 
+        this.input.enabled = true;
+        this.events.once('shutdown', function () { this.input.enabled = false; }, this);
+
         this.cameras.main.fadeIn(500);
         EscolaHeroes.AudioManager.startMusic('menu');
 
