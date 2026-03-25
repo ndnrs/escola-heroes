@@ -10,6 +10,13 @@ EscolaHeroes.MenuScene = class MenuScene extends Phaser.Scene {
     }
 
     create() {
+        // DEBUG TRAP: Quem iniciou o MenuScene?
+        var stack = new Error().stack;
+        var activeScenes = this.scene.manager.getScenes(true).map(function(s) { return s.scene.key; });
+        console.error('=== MENUSCENE CRIADO ===');
+        console.error('Scenes activas:', activeScenes.join(', '));
+        console.error('Stack:', stack);
+
         var W = EscolaHeroes.GAME_WIDTH;
         var H = EscolaHeroes.GAME_HEIGHT;
 
