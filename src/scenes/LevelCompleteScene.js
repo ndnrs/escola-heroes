@@ -137,12 +137,17 @@ EscolaHeroes.LevelCompleteScene = class LevelCompleteScene extends Phaser.Scene 
         // Restaurar HP para proximo nivel
         this.registry.set('playerHP', 100);
 
+        // Guarda contra duplo-clique
+        var clicked = false;
+
         // Botao "PROXIMO NIVEL"
         if (nextLevelKey) {
             var nextBtn = this.createButton(W / 2, H - 130, 'PROXIMO NIVEL', 0x00AA00, 220, 48);
             nextBtn.setAlpha(0);
             this.tweens.add({ targets: nextBtn, alpha: 1, duration: 300, delay: 1200 });
             nextBtn.on('pointerup', function () {
+                if (clicked) return;
+                clicked = true;
                 self.scene.start(nextLevelKey);
             });
         } else {
@@ -166,6 +171,8 @@ EscolaHeroes.LevelCompleteScene = class LevelCompleteScene extends Phaser.Scene 
         menuBtn.setAlpha(0);
         this.tweens.add({ targets: menuBtn, alpha: 1, duration: 300, delay: 1400 });
         menuBtn.on('pointerup', function () {
+            if (clicked) return;
+            clicked = true;
             self.scene.start('MenuScene');
         });
     }

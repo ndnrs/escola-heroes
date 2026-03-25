@@ -77,15 +77,22 @@ EscolaHeroes.GameOverScene = class GameOverScene extends Phaser.Scene {
             }).setOrigin(0.5);
         }
 
+        // Guarda contra duplo-clique
+        var clicked = false;
+
         // Botao "TENTAR OUTRA VEZ"
         var retryBtn = this.createButton(W / 2, H / 2 + 60, 'TENTAR OUTRA VEZ', 0x00AA00, 220, 44);
         retryBtn.on('pointerup', function () {
+            if (clicked) return;
+            clicked = true;
             self.scene.start(levelKey);
         });
 
         // Botao "MENU"
         var menuBtn = this.createButton(W / 2, H / 2 + 120, 'MENU', 0x4A90D9, 160, 40);
         menuBtn.on('pointerup', function () {
+            if (clicked) return;
+            clicked = true;
             self.scene.start('MenuScene');
         });
 

@@ -230,6 +230,8 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
     }
 
     selectCharacter(charData, container) {
+        if (this._selecting) return;
+        this._selecting = true;
         var self = this;
 
         // Flash branco de seleccao
