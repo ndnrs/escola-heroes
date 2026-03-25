@@ -57,7 +57,7 @@ git add -A && git commit -m "fase 2: mecanicas core"
 ### FASE 3 — Nivel 1: Cantina
 
 ```
-/ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-3.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 3 COMPLETE</promise>" --completion-promise "FASE 3 COMPLETE" --max-iterations 20
+ /ralph-loop:ralph-loop "Lê escola-heroes-prompts/GAME-DESIGN.md e ~/Dev/pessoal/escola-heroes/escola-heroes-prompts/PROMPT-FASE-3.md. Executa TUDO. NAO apagues código anterior. Verifica todos os critérios. Quando cumpridos, output <promise>FASE 3 COMPLETE</promise>" --completion-promise "FASE 3 COMPLETE" --max-iterations 20
 ```
 
 Testar no browser. Se OK:

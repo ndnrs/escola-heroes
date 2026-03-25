@@ -123,7 +123,6 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
-                self.scene.stop('ClassroomScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'ClassroomScene',
                     stats: {
@@ -632,7 +631,10 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
         this.levelComplete = true;
         var elapsed = (this.time.now - this.levelStartTime) / 1000;
 
+        var hudScene = this.scene.get('HUDScene');
+        var score = (hudScene && hudScene.score) ? hudScene.score : 0;
         this.scene.stop('HUDScene');
+
         this.scene.start('LevelCompleteScene', {
             levelName: 'SALAS DE AULA',
             nextLevelKey: 'BossScene',
@@ -641,7 +643,7 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
                 totalMonsters: 26,
                 hp: this.player.hp,
                 time: elapsed,
-                score: 0
+                score: score
             }
         });
     }

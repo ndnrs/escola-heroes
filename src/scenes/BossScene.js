@@ -75,7 +75,6 @@ EscolaHeroes.BossScene = class BossScene extends Phaser.Scene {
         this.events.on('playerDied', function () {
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
-                self.scene.stop('BossScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'BossScene',
                     stats: {

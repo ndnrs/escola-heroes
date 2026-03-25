@@ -104,7 +104,6 @@ EscolaHeroes.GymScene = class GymScene extends Phaser.Scene {
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
-                self.scene.stop('GymScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'GymScene',
                     stats: {
@@ -554,7 +553,10 @@ EscolaHeroes.GymScene = class GymScene extends Phaser.Scene {
         this.levelComplete = true;
         var elapsed = (this.time.now - this.levelStartTime) / 1000;
 
+        var hudScene = this.scene.get('HUDScene');
+        var score = (hudScene && hudScene.score) ? hudScene.score : 0;
         this.scene.stop('HUDScene');
+
         this.scene.start('LevelCompleteScene', {
             levelName: 'PAVILHAO DESPORTIVO',
             nextLevelKey: 'ClassroomScene',
@@ -563,7 +565,7 @@ EscolaHeroes.GymScene = class GymScene extends Phaser.Scene {
                 totalMonsters: 21,
                 hp: this.player.hp,
                 time: elapsed,
-                score: 0
+                score: score
             }
         });
     }

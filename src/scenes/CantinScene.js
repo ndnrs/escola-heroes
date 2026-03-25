@@ -100,7 +100,6 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
-                self.scene.stop('CantinScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'CantinScene',
                     stats: {
@@ -506,16 +505,20 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
         this.levelComplete = true;
         var elapsed = (this.time.now - this.levelStartTime) / 1000;
 
+        // Ler score do HUD ANTES de o parar
+        var hudScene = this.scene.get('HUDScene');
+        var score = (hudScene && hudScene.score) ? hudScene.score : 0;
         this.scene.stop('HUDScene');
+
         this.scene.start('LevelCompleteScene', {
             levelName: 'CANTINA',
             nextLevelKey: 'GymScene',
             stats: {
                 monstersKilled: this.monstersKilled,
-                totalMonsters: 16, // 15 + boss
+                totalMonsters: 16,
                 hp: this.player.hp,
                 time: elapsed,
-                score: this.scene.get('HUDScene') ? 0 : 0
+                score: score
             }
         });
     }
