@@ -23,11 +23,21 @@ EscolaHeroes.MenuScene = class MenuScene extends Phaser.Scene {
             color: '#336633'
         }).setOrigin(1, 1).setDepth(20);
 
-        this.add.text(W / 2, H - 10, 'Feito com amor para [NOME]', {
+        // Toggle invencibilidade (para teste)
+        var godMode = this.registry.get('godMode') || false;
+        var godText = this.add.text(10, H - 10, godMode ? 'INVENCIVEL: ON' : 'INVENCIVEL: OFF', {
             fontFamily: 'Arial, sans-serif',
             fontSize: '10px',
-            color: '#336633'
-        }).setOrigin(0.5, 1).setDepth(20);
+            color: godMode ? '#00FF00' : '#666666'
+        }).setOrigin(0, 1).setDepth(20).setInteractive({ useHandCursor: true });
+
+        var selfMenu = this;
+        godText.on('pointerup', function () {
+            var current = selfMenu.registry.get('godMode') || false;
+            selfMenu.registry.set('godMode', !current);
+            godText.setText(!current ? 'INVENCIVEL: ON' : 'INVENCIVEL: OFF');
+            godText.setColor(!current ? '#00FF00' : '#666666');
+        });
 
         // --- Background: gradiente ceu → relva ---
         this.drawBackground(W, H);

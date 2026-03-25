@@ -111,6 +111,7 @@ EscolaHeroes.Player.prototype.shoot = function (time, projectiles) {
 // Receber dano
 EscolaHeroes.Player.prototype.takeDamage = function (amount) {
     if (!this.alive || this.isInvincible || this.isShielded) return;
+    if (this.scene.registry.get('godMode')) return;
 
     this.hp -= amount;
     if (this.hp < 0) this.hp = 0;
