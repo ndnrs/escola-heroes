@@ -80,12 +80,19 @@ EscolaHeroes.GameOverScene = class GameOverScene extends Phaser.Scene {
         // Botao "TENTAR OUTRA VEZ"
         var retryBtn = this.createButton(W / 2, H / 2 + 60, 'TENTAR OUTRA VEZ', 0x00AA00, 220, 44);
         retryBtn.on('pointerup', function () {
+            // Parar scenes residuais antes de reiniciar
+            self.scene.stop(levelKey);
+            self.scene.stop('HUDScene');
+            self.scene.stop('GameOverScene');
             self.scene.start(levelKey);
         });
 
         // Botao "MENU"
         var menuBtn = this.createButton(W / 2, H / 2 + 120, 'MENU', 0x4A90D9, 160, 40);
         menuBtn.on('pointerup', function () {
+            self.scene.stop(levelKey);
+            self.scene.stop('HUDScene');
+            self.scene.stop('GameOverScene');
             self.scene.start('MenuScene');
         });
 

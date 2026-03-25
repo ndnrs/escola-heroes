@@ -13,6 +13,10 @@ EscolaHeroes.Monster = function (scene, x, y, typeConfig) {
     this.sprite = scene.physics.add.sprite(x, y, textureKey);
     this.sprite.setDepth(5);
 
+    // Reduzir hitbox para colisoes mais justas (textura 40x40)
+    this.sprite.body.setSize(24, 24);
+    this.sprite.body.setOffset(8, 8);
+
     // Referencia para callbacks de colisao
     this.sprite.monsterRef = this;
 

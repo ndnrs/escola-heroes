@@ -104,6 +104,7 @@ EscolaHeroes.GymScene = class GymScene extends Phaser.Scene {
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
+                self.scene.stop('GymScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'GymScene',
                     stats: {

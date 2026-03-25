@@ -15,6 +15,11 @@ EscolaHeroes.Player = function (scene, x, y, characterData) {
     this.sprite.setScale(1.5);
     this.sprite.setDepth(10);
 
+    // Reduzir hitbox para corresponder ao visual (textura 48x48, escalada 1.5x)
+    // Hitbox mais pequena que o sprite para colisoes mais justas
+    this.sprite.body.setSize(24, 30);
+    this.sprite.body.setOffset(12, 14);
+
     // Referencia para callbacks de colisao
     this.sprite.playerRef = this;
 

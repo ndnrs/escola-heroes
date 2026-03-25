@@ -123,6 +123,7 @@ EscolaHeroes.ClassroomScene = class ClassroomScene extends Phaser.Scene {
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
+                self.scene.stop('ClassroomScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'ClassroomScene',
                     stats: {

@@ -100,6 +100,7 @@ EscolaHeroes.CantinScene = class CantinScene extends Phaser.Scene {
             self.waveManager.stop();
             self.time.delayedCall(1000, function () {
                 self.scene.stop('HUDScene');
+                self.scene.stop('CantinScene');
                 self.scene.start('GameOverScene', {
                     levelKey: 'CantinScene',
                     stats: {
