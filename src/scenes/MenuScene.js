@@ -36,6 +36,7 @@ EscolaHeroes.MenuScene = class MenuScene extends Phaser.Scene {
 
         var selfMenu = this;
         godText.on('pointerup', function () {
+            if (!selfMenu.sys.isActive()) return;
             var current = selfMenu.registry.get('godMode') || false;
             selfMenu.registry.set('godMode', !current);
             godText.setText(!current ? 'INVENCIVEL: ON' : 'INVENCIVEL: OFF');

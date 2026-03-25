@@ -202,12 +202,15 @@ EscolaHeroes.VictoryScene = class VictoryScene extends Phaser.Scene {
         this.tweens.add({ targets: btn, alpha: 1, duration: 300, delay: 2000 });
 
         btn.on('pointerover', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({ targets: btn, scaleX: 1.05, scaleY: 1.05, duration: 100 });
         });
         btn.on('pointerout', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({ targets: btn, scaleX: 1, scaleY: 1, duration: 100 });
         });
         btn.on('pointerup', function () {
+            if (!self.sys.isActive()) return;
             // Reset stats
             self.registry.set('totalStats', { monstersKilled: 0, time: 0 });
             self.scene.start('SelectScene');

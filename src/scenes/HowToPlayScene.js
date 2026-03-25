@@ -153,6 +153,7 @@ EscolaHeroes.HowToPlayScene = class HowToPlayScene extends Phaser.Scene {
         container.setInteractive({ useHandCursor: true });
 
         container.on('pointerover', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({
                 targets: container,
                 scaleX: 1.08,
@@ -163,6 +164,7 @@ EscolaHeroes.HowToPlayScene = class HowToPlayScene extends Phaser.Scene {
         });
 
         container.on('pointerout', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({
                 targets: container,
                 scaleX: 1,
@@ -173,6 +175,7 @@ EscolaHeroes.HowToPlayScene = class HowToPlayScene extends Phaser.Scene {
         });
 
         container.on('pointerup', function () {
+            if (!self.sys.isActive()) return;
             self.scene.start('MenuScene');
         });
     }

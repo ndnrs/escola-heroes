@@ -132,8 +132,9 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
         glowBorder.setAlpha(0);
         container.add(glowBorder);
 
-        // Hover
+        // Hover (com guarda isActive)
         container.on('pointerover', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({
                 targets: container,
                 scaleX: 1.05,
@@ -141,7 +142,6 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
                 duration: 200,
                 ease: 'Back.easeOut'
             });
-            // Borda brilha
             glowBorder.clear();
             glowBorder.lineStyle(4, charData.color, 1);
             glowBorder.strokeRoundedRect(-w / 2, -h / 2, w, h, 14);
@@ -153,6 +153,7 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
         });
 
         container.on('pointerout', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({
                 targets: container,
                 scaleX: 1,
@@ -167,8 +168,9 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
             });
         });
 
-        // Seleccao
+        // Seleccao (com guarda isActive)
         container.on('pointerup', function () {
+            if (!self.sys.isActive()) return;
             self.selectCharacter(charData, container);
         });
 
@@ -278,14 +280,17 @@ EscolaHeroes.SelectScene = class SelectScene extends Phaser.Scene {
         text.setInteractive({ useHandCursor: true });
 
         text.on('pointerover', function () {
+            if (!self.sys.isActive()) return;
             text.setColor('#FFFFFF');
         });
 
         text.on('pointerout', function () {
+            if (!self.sys.isActive()) return;
             text.setColor('#888888');
         });
 
         text.on('pointerup', function () {
+            if (!self.sys.isActive()) return;
             self.scene.start('MenuScene');
         });
     }

@@ -214,9 +214,11 @@ EscolaHeroes.LevelCompleteScene = class LevelCompleteScene extends Phaser.Scene 
 
         var self = this;
         container.on('pointerover', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({ targets: container, scaleX: 1.05, scaleY: 1.05, duration: 100 });
         });
         container.on('pointerout', function () {
+            if (!self.sys.isActive()) return;
             self.tweens.add({ targets: container, scaleX: 1, scaleY: 1, duration: 100 });
         });
 
